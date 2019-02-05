@@ -63,7 +63,7 @@
 
         {% for result in user_information %}
             <tr role="row" class="odd">
-            <td><a href="/show_text/{{ result["_id"] }}" target=" _blank">  {{ result["link"] }}</a></td>
+            <td><a href="/show_text/{{ result["_id"] }}" target=" _blank">  {{ result["tag"] }}</a></td>
             <td>{{ result["title"] }}</td>
 
         {% endfor %}
