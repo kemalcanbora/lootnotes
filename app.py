@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-from pymongo import MongoClient
+from pymongo import MongoClient,DESCENDING
 from bson.objectid import ObjectId
 import re
 from mongo_schema import TextDocument
@@ -16,7 +16,8 @@ def regex_mongo(text):
 
 @app.route('/')
 def home():
-    return render_template('search.html')
+    documents = db.text_document.find({}).sort("_id",DESCENDING).limit(10) # get last 10 rows
+    return render_template('search.html',documents=documents)
 
 
 @app.route('/add_note', methods=['GET', 'POST'])
