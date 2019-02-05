@@ -33,7 +33,7 @@
 
     <form action="/search/results" method="post">
         <div class="input-group">
-            <input type="text" class="form-control input-lg" name="input" placeholder="Search" autofocus>
+            <input type="text" class="form-control input-lg" name="input" placeholder="Search Tag" autofocus>
             <div class="input-group-btn">
                 <button class="btn btn-primary btn-lg" type="submit">
                     <i class="glyphicon glyphicon-search"></i>
@@ -64,10 +64,10 @@
         </thead>
         <tbody>
 
-        {% for result in user_information %}
+        {% for item in documents %}
             <tr role="row" class="odd">
-            <td><a href="/show_text/{{ result["_id"] }}" target=" _blank">  {{ result["tag"] }}</a></td>
-            <td>{{ result["title"] }}</td>
+            <td><a href="/show_text/{{ item["_id"] }}" target=" _blank">  {{ item["tag"] }}</a></td>
+            <td>{{ item["title"] }}</td>
 
         {% endfor %}
         </tr>
