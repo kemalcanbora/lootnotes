@@ -1,67 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Example of Bootstrap 3 Modals</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="../static/navimenu.css">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Example of Bootstrap 3 Modals</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-<script type="text/javascript">
-	$(document).ready(function(){
-		$("#myModal").modal('show');
-	});
-</script>
+    <link rel="stylesheet" href="../static/navimenu.css">
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#myModal").modal('show');
+        });
+    </script>
+
+
 </head>
 <body>
 {# Navi bar#}
 <div class="topnav">
-  <a class="active" href="/">Home</a>
-  <a href="/add_note" > Add New Note</a>
+    <a class="active" href="/">Home</a>
+    <a href="/add_note"> Add New Note</a>
 </div>
+
+
+
+
 {#Enf of navi #}
-    <div id="myModal" class="modal fade">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">Sample Model Box - Header Area</h4>
-                </div>
-                <div class="modal-body">
-                    <form method="POST">
-
-                          <div class="form-group">
-                            <label for="recipient-name" class="control-label">Link:</label>
-                            <input type="text" class="form-control" id="link" name="link">
-                          </div>
-
-                          <div class="form-group">
-                            <label for="message-text" class="control-label">Message:</label>
-                            <textarea class="form-control" id="message" name="message" ></textarea>
-                          </div>
-
-                         <div class="form-group">
-                            <label for="recipient-name" class="control-label">Tag:</label>
-                            <input type="text" class="form-control" id="tag" name="tag">
-                          </div>
-
-                          <div class="form-group">
-                            <label for="message-text" class="control-label">Title:</label>
-                            <textarea class="form-control" id="title" name="title" ></textarea>
-                          </div>
-
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save</button>
-                </div>
+<div id="myModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Sample Model Box - Header Area</h4>
             </div>
-             </form>
+
+
+            <div class="modal-body">
+                <form method="POST">
+                    <div class="form-group">
+                        <label for="recipient-name" class="control-label">Link:</label>
+                        <input type="text" class="form-control" id="link" name="link" placeholder="Enter your source url" value={{ url }}>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message-text" class="control-label">Message:</label>
+                        <textarea class="form-control" id="message" name="message"  placeholder="Message">{{ text }} </textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="recipient-name" class="control-label">Tag:</label>
+                        <input type="text" class="form-control" id="tag" name="tag" placeholder="Tag">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message-text" class="control-label">Title:</label>
+                        <textarea class="form-control" id="title" name="title" placeholder="Title"> {{ title }}</textarea>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <input type="submit" class="btn btn-primary"  name="Save" value="Save">
+                        <input type="submit" class="btn btn-primary"  name="Extract" value="Extract">
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
+</div>
 </body>
 </html>
