@@ -2,83 +2,54 @@
 <html lang="en">
 <head>
 
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Pacifico">
-    <link rel="icon" href="http://obj-cache.cloud.ruanbekker.com/favicon.ico">
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../static/navimenu.css">
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Pacifico">
+  <link rel="icon" href="http://obj-cache.cloud.ruanbekker.com/favicon.ico">
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../static/navimenu.css">
 
-    <title>Bookmarks Search</title>
+  <title>Bookmarks Search</title>
 
 </head>
 
 {# Navi bar#}
 <div class="topnav">
-    <a class="active" href="/">Home</a>
-    <a href="/add_note"> Add New Note</a>
+  <a class="active" href="/">Home</a>
+  <a href="/add_note" > Add New Note</a>
 </div>
 {#Enf of navi #}
 
 
+
+
 <div class="container">
     <div style="background:transparent !important" class="jumbotron">
-        <div style="font-family: 'Pacifico', cursive;">
-            <p>
-            <center>
-                <font size="8">Loot Notes</font>
-            </center>
-            </p>
-        </div>
+      <div style="font-family: 'Pacifico', cursive;">
+        <p>
+          <center>
+          <font size="8">Loot Notes</font>
+          </center>
+        </p>
+      </div>
     </div>
 
     <form action="/search/results" method="post">
-        <div class="input-group">
-            <input type="text" class="form-control input-lg" name="input" placeholder="Search Tag" autofocus>
-            <div class="input-group-btn">
-                <button class="btn btn-primary btn-lg" type="submit">
-                    <i class="glyphicon glyphicon-search"></i>
-                </button>
-            </div>
+      <div class="input-group">
+        <input type="text" class="form-control input-lg" name="input" placeholder="Search" autofocus>
+        <div class="input-group-btn">
+          <button class="btn btn-primary btn-lg" type="submit">
+            <i class="glyphicon glyphicon-search"></i>
+          </button>
         </div>
+      </div>
     </form>
 
-
-    <br>
-    <h4>Last 10 row </h4>
-
-    <table ui-jq="dataTable" class="table table-striped b-t b-b dataTable no-footer"
-           id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
-        <thead>
-
-        <tr role="row" class="font-bold text-center no_border">
-
-            <th style="width: 150px;" class="sorting no_border" tabindex="0"
-                aria-controls="DataTables_Table_0" rowspan="1" colspan="1"
-                aria-label="Browser: activate to sort column ascending">Source
-            </th>
-            <th style="width: 100px;" class="sorting no_border" tabindex="0"
-                aria-controls="DataTables_Table_0" rowspan="1" colspan="1"
-                aria-label="Platform(s): activate to sort column ascending">Title
-            </th>
-        </tr>
-        </thead>
-        <tbody>
-
-        {% for item in documents %}
-            <tr role="row" class="odd">
-            <td><a href="/show_text/{{ item["_id"] }}" target=" _blank">  {{ item["tag"] }}</a></td>
-            <td>{{ item["title"] }}</td>
-
-        {% endfor %}
-        </tr>
-
-    </table>
-
-    <footer class="footer">
+    <br><br>
+      <footer class="footer">
         <p>&copy; 2017 Lootnotes </p>
-    </footer>
+      </footer>
 
-</div>
-</div>
-</body>
+      </div>
+    </div>
+  </body>
 </html>
