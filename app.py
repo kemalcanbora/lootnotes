@@ -1,9 +1,9 @@
 from flask import Flask, render_template, request
-from pymongo import MongoClient,DESCENDING
-from bson.objectid import ObjectId
+from pymongo import MongoClient
 import re
 from mongo_schema import TextDocument
 from settings import *
+from text_extractor import *
 
 app = Flask(__name__)
 client = MongoClient('mongodb://{}:{}'.format(MONGO_HOST_NAME, MONGO_HOST_PORT))
@@ -16,26 +16,28 @@ def regex_mongo(text):
 
 @app.route('/')
 def home():
-    documents = db.text_document.find({}).sort("_id",DESCENDING).limit(10) # get last 10 rows
-    return render_template('search.html',documents=documents)
+    return render_template('search.html')
 
 
 @app.route('/add_note', methods=['GET', 'POST'])
 def add_note():
-    if request.method == 'POST':
-        tag_list = ["tag", "title", "message"]
-        for item in tag_list:
-            if len(request.form[item]) < 3:
-                print("Zorunlu alan ")
-                break
-            else:
-                TextDocument(link=request.form['link'],
-                             tag=request.form['tag'],
-                             message=request.form['message'],
-                             title=request.form['title']).save()
-                return render_template("search.html")
+    if 'Save' in request.form:
+        TextDocument(link=request.form['link'],
+                     tag=request.form['tag'],
+                     message=request.form['message'],
+                     title=request.form['title']).save()
 
-    return render_template('add_new_note.html')
+    # buraya uyarı Kaydedildi bunlar bos vs
+
+    if 'Extract' in request.form:
+        lang = language_controller(request.form['link'])
+        text = TextParser(request.form['link'], lang=lang).parse_text()
+        title = TextParser(request.form['link'], lang=lang).parse_title()
+        url = TextParser(request.form['link'], lang=lang).parse_url()
+        # buraya uyarı Kaydedildi bunlar bos vs
+        return render_template("add_new_note.html", text=text, title=title, url=url)
+
+    return render_template('add_new_note.html', text="", title="", url="")
 
 
 @app.route('/search/results', methods=['GET', 'POST'])
@@ -44,12 +46,6 @@ def search_request():
     user_information = db.text_document.find({"tag": regex_mongo(search_term)})
 
     return render_template('results.html', user_information=user_information)
-
-
-@app.route('/show_text/<document_id>', methods=['GET', 'POST'])
-def get_text(document_id):
-    document_information = db.text_document.find({'_id': ObjectId(document_id)})
-    return render_template("show_text.html", document_information=document_information)
 
 
 if __name__ == '__main__':
