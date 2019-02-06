@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="utf-8">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Pacifico">
     <link rel="icon" href="http://obj-cache.cloud.ruanbekker.com/favicon.ico">
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../static/navimenu.css">
     <title>Bookmarks Search</title>
+
 </head>
 <body>
 
 {# Navi bar#}
 <div class="topnav">
-    <a class="active" href="/">Home</a>
-    <a href="/add_note"> Add New Note</a>
+  <a class="active" href="/">Home</a>
+  <a href="/add_note" > Add New Note</a>
 </div>
 {#Enf of navi #}
 
@@ -57,19 +59,22 @@
                 aria-controls="DataTables_Table_0" rowspan="1" colspan="1"
                 aria-label="Platform(s): activate to sort column ascending">Title
             </th>
+
+
         </tr>
         </thead>
         <tbody>
 
         {% for result in user_information %}
             <tr role="row" class="odd">
-            <td><a href="/show_text/{{ result["_id"] }}" target=" _blank">  {{ result["tag"] }}</a></td>
-            <td>{{ result["title"] }}</td>
+            <td><a href ="{{ result["link"]}}" target=" _blank">  {{ result["link"]  }}</a></td>
+            <td>{{ result["title"]  }}</td>
 
         {% endfor %}
         </tr>
 
     </table>
+
     <footer class="footer">
         <p>&copy; 2017 Lootnotes</p>
     </footer>
