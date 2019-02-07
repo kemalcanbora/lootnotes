@@ -7,3 +7,5 @@ Search with tag and find some documents
 If your bookmark is so long you can use extractor
 # Technology
 MongoDB, Flask, Python
+# How to use it
+[![Watch the video](https://img.youtube.com/vi/dUshg5AvhTw/maxresdefault.jpg)](https://youtu.be/dUshg5AvhTw)
