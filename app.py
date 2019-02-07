@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request ,flash
 from pymongo import MongoClient
 import re
 from mongo_schema import TextDocument
@@ -6,6 +6,7 @@ from settings import *
 from text_extractor import *
 
 app = Flask(__name__)
+
 client = MongoClient('mongodb://{}:{}'.format(MONGO_HOST_NAME, MONGO_HOST_PORT))
 db = client.lootnotes
 
@@ -27,14 +28,11 @@ def add_note():
                      message=request.form['message'],
                      title=request.form['title']).save()
 
-    # buraya uyarı Kaydedildi bunlar bos vs
-
     if 'Extract' in request.form:
         lang = language_controller(request.form['link'])
         text = TextParser(request.form['link'], lang=lang).parse_text()
         title = TextParser(request.form['link'], lang=lang).parse_title()
         url = TextParser(request.form['link'], lang=lang).parse_url()
-        # buraya uyarı Kaydedildi bunlar bos vs
         return render_template("add_new_note.html", text=text, title=title, url=url)
 
     return render_template('add_new_note.html', text="", title="", url="")
