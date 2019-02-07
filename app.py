@@ -1,5 +1,6 @@
-from flask import Flask, render_template, request ,flash
-from pymongo import MongoClient
+from flask import Flask, render_template, request
+from pymongo import MongoClient, DESCENDING
+from bson.json_util import ObjectId
 import re
 from mongo_schema import TextDocument
 from settings import *
@@ -17,7 +18,9 @@ def regex_mongo(text):
 
 @app.route('/')
 def home():
-    return render_template('search.html')
+    documents = db.text_document.find({}).sort("_id", DESCENDING).limit(10)  # get last 10 rows
+
+    return render_template('search.html', documents=documents)
 
 
 @app.route('/add_note', methods=['GET', 'POST'])
@@ -29,13 +32,20 @@ def add_note():
                      title=request.form['title']).save()
 
     if 'Extract' in request.form:
-        lang = language_controller(request.form['link'])
-        text = TextParser(request.form['link'], lang=lang).parse_text()
-        title = TextParser(request.form['link'], lang=lang).parse_title()
-        url = TextParser(request.form['link'], lang=lang).parse_url()
-        return render_template("add_new_note.html", text=text, title=title, url=url)
+        if ("http" or "https") in request.form['link']:
+            lang = language_controller(request.form['link'])
+            text = TextParser(request.form['link'], lang=lang).parse_text()
+            title = TextParser(request.form['link'], lang=lang).parse_title()
+            url = TextParser(request.form['link'], lang=lang).parse_url()
+            return render_template("add_new_note.html", text=text, title=title, url=url)
 
     return render_template('add_new_note.html', text="", title="", url="")
+
+
+@app.route('/show_text/<document_id>', methods=['GET', 'POST'])
+def get_text(document_id):
+    document = db.text_document.find({'_id': ObjectId(document_id)})
+    return render_template("show_text.html", document=document)
 
 
 @app.route('/search/results', methods=['GET', 'POST'])
