@@ -44,6 +44,35 @@
       </div>
     </form>
 
+
+     <table ui-jq="dataTable" class="table table-striped b-t b-b dataTable no-footer"
+           id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
+        <thead>
+
+         <tr role="row" class="font-bold text-center no_border">
+
+             <th style="width: 150px;" class="sorting no_border" tabindex="0"
+                aria-controls="DataTables_Table_0" rowspan="1" colspan="1"
+                aria-label="Browser: activate to sort column ascending">Last Rows
+            </th>
+            <th style="width: 100px;" class="sorting no_border" tabindex="0"
+                aria-controls="DataTables_Table_0" rowspan="1" colspan="1"
+                aria-label="Platform(s): activate to sort column ascending">Title
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+
+         {% for item in documents %}
+            <tr role="row" class="odd">
+            <td><a href="/show_text/{{ item["_id"] }}" target=" _blank">  {{ item["tag"] }}</a></td>
+            <td>{{ item["title"] }}</td>
+
+         {% endfor %}
+        </tr>
+
+     </table>
+
     <br><br>
       <footer class="footer">
         <p>&copy; 2017 Lootnotes </p>
