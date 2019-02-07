@@ -15,6 +15,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $("#myModal").modal('show');
+
         });
     </script>
 
@@ -60,12 +61,12 @@
     <a class="active" href="/">Home</a>
     <a href="/add_note"> Add New Note</a>
 </div>
-
-
-
-
 {#Enf of navi #}
-<div id="myModal" class="modal fade">
+<div id="myModal" class="modal fade"  tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel"
+     aria-hidden="true"
+     data-backdrop="static"  data-keyboard="false">
+
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
