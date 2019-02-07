@@ -19,19 +19,19 @@ def regex_mongo(text):
 @app.route('/')
 def home():
     documents = db.text_document.find({}).sort("_id", DESCENDING).limit(GET_LAST_N_RECORD)
-
     return render_template('search.html', documents=documents)
 
 
 @app.route('/add_note', methods=['GET', 'POST'])
 def add_note():
     if 'Save' in request.form:
-        TextDocument(link=request.form['link'],
-                     tag=request.form['tag'],
-                     message=request.form['message'],
-                     title=request.form['title']).save()
+        if len(request.form['message']) > 3:
+            TextDocument(link=request.form['link'],
+                         tag=request.form['tag'],
+                         message=request.form['message'],
+                         title=request.form['title']).save()
 
-        return redirect(url_for("home"))
+            return redirect(url_for("home"))
 
     if 'Close' in request.form:
         return redirect(url_for("home"))
@@ -44,7 +44,7 @@ def add_note():
             url = TextParser(request.form['link'], lang=lang).parse_url()
             return render_template("add_new_note.html", text=text, title=title, url=url)
 
-    return render_template('add_new_note.html', text="", title="", url="")
+    return render_template('add_new_note.html')
 
 
 @app.route('/show_text/<document_id>', methods=['GET', 'POST'])
