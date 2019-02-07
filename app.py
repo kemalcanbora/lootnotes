@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request ,redirect ,url_for
 from pymongo import MongoClient, DESCENDING
 from bson.json_util import ObjectId
 import re
@@ -30,6 +30,9 @@ def add_note():
                      tag=request.form['tag'],
                      message=request.form['message'],
                      title=request.form['title']).save()
+
+    if 'Close' in request.form:
+        return redirect(url_for("home"))
 
     if 'Extract' in request.form:
         if ("http" or "https") in request.form['link']:
