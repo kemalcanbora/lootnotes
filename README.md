@@ -1,4 +1,4 @@
-# lootnotes
+# Lootnotes
 # What is lootnotes
 Lootnotes is open-source text store application.If you lose in your bookmarks and trash this is for you. 
 # What can I do with this ?
