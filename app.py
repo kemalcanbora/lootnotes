@@ -18,7 +18,7 @@ def regex_mongo(text):
 
 @app.route('/')
 def home():
-    documents = db.text_document.find({}).sort("_id", DESCENDING).limit(10)  # get last 10 rows
+    documents = db.text_document.find({}).sort("_id", DESCENDING).limit(GET_LAST_N_RECORD)
 
     return render_template('search.html', documents=documents)
 
