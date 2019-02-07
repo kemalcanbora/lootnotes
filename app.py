@@ -31,6 +31,8 @@ def add_note():
                      message=request.form['message'],
                      title=request.form['title']).save()
 
+        return redirect(url_for("home"))
+
     if 'Close' in request.form:
         return redirect(url_for("home"))
 
