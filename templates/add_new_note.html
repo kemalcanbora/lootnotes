@@ -8,14 +8,50 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
     <link rel="stylesheet" href="../static/navimenu.css">
+
+
 
     <script type="text/javascript">
         $(document).ready(function () {
             $("#myModal").modal('show');
         });
     </script>
+
+{# check link message or not#}
+
+<script>
+    $(document).ready(function(){
+    $('.btn-primary').attr('disabled',true);
+
+    $('#message').keyup(function(){
+        if($(this).val().length !=0){
+            $('.btn-primary').attr('disabled', false);
+        }
+        else
+        {
+            $('.btn-primary').attr('disabled', true);
+        }
+    })
+});
+</script>
+
+{# check link empty or not#}
+<script>
+    $(document).ready(function(){
+    $('.btn-success').attr('disabled',true);
+
+    $('#link').keyup(function(){
+        if($(this).val().length !=0){
+            $('.btn-success').attr('disabled', false);
+        }
+        else
+        {
+            $('.btn-success').attr('disabled', true);
+        }
+    })
+});
+</script>
 
 
 </head>
@@ -40,7 +76,7 @@
 
 
             <div class="modal-body">
-                <form method="POST">
+                <form method="POST" onSubmit="return validateForm()" >
                     <div class="form-group">
                         <label for="recipient-name" class="control-label">Link:</label>
                         <input type="text" class="form-control" id="link" name="link" placeholder="Enter your source url" value={{ url }}>
@@ -60,11 +96,10 @@
                         <label for="message-text" class="control-label">Title:</label>
                         <textarea class="form-control" id="title" name="title" placeholder="Title"> {{ title }}</textarea>
                     </div>
-
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <input type="submit" class="btn btn-primary"  name="Save" value="Save">
-                        <input type="submit" class="btn btn-primary"  name="Extract" value="Extract">
+                        <input type="submit" class="btn btn-primary"  name="Save" value="Save" >
+                        <input type="submit" class="btn btn-success"  name="Extract" value="Extract">
                     </div>
                 </form>
             </div>
