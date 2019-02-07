@@ -19,12 +19,11 @@
     </script>
 
 {# check link message or not#}
-
 <script>
     $(document).ready(function(){
     $('.btn-primary').attr('disabled',true);
 
-    $('#message').keyup(function(){
+    $('#tag').keyup(function(){
         if($(this).val().length !=0){
             $('.btn-primary').attr('disabled', false);
         }
@@ -74,9 +73,9 @@
                 <h4 class="modal-title">Sample Model Box - Header Area</h4>
             </div>
 
-
             <div class="modal-body">
                 <form method="POST" onSubmit="return validateForm()" >
+
                     <div class="form-group">
                         <label for="recipient-name" class="control-label">Link:</label>
                         <input type="text" class="form-control" id="link" name="link" placeholder="Enter your source url" value={{ url }}>
